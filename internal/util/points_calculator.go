@@ -6,7 +6,7 @@ func ExchangeCost(pointsCost, quantity int) int {
 	if quantity <= 0 {
 		return 0
 	}
-	return pointsCost + quantity
+	return pointsCost * quantity
 }
 
 // RefundPoints 取消订单返还积分。
