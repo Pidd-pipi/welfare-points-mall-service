@@ -20,7 +20,7 @@ func (s OrderStatus) Valid() bool {
 
 // OrderStatusFlow 订单状态机：新增状态值需同步前端 constants、按钮显隐、日志模板、错误码、formatters。
 var OrderStatusFlow = map[OrderStatus][]OrderStatus{
-	OrderPending:   {OrderShipped},
+	OrderPending:   {OrderShipped, OrderCancelled},
 	OrderShipped:   {OrderCompleted, OrderCancelled},
 	OrderCompleted: {},
 	OrderCancelled: {},

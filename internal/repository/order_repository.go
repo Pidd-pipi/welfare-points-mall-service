@@ -128,7 +128,7 @@ func (r *orderRepository) UpdateTx(tx *gorm.DB, order *model.Order) error {
 
 func (r *orderRepository) TransitionStatusTx(tx *gorm.DB, id uint, from, to constants.OrderStatus) error {
 	res := dbOrTx(r.db, tx).Model(&model.Order{}).
-		Where("id = ?", id).
+		Where("id = ? AND status = ?", id, from).
 		Update("status", to)
 	if res.Error != nil {
 		return fmt.Errorf("transition order status: %w", res.Error)
