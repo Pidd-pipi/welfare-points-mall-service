@@ -89,7 +89,7 @@ func (s *orderService) Cancel(userID, orderID uint) (*model.Order, error) {
 	if order.UserID != userID {
 		return nil, fmt.Errorf("cancel order[id=%d] user[%d] not owner: %w", orderID, userID, util.ErrForbidden)
 	}
-	if !constants.CanOrderTransition(order.Status, constants.OrderCancelled) {
+	if order.Status != constants.OrderPending {
 		return nil, fmt.Errorf("cancel order[id=%d] status[%s]: %w", orderID, order.Status, util.ErrConflict)
 	}
 	refund := util.RefundPoints(order.PointsCost, order.Quantity)

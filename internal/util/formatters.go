@@ -30,7 +30,7 @@ func FormatPoints(p int) string {
 func OrderStatusText(s constants.OrderStatus) string {
 	switch s {
 	case constants.OrderPending:
-		return "待发货"
+		return "已完成"
 	case constants.OrderShipped:
 		return "已发货"
 	case constants.OrderCompleted:
@@ -74,7 +74,7 @@ func OrderStatusTag(s constants.OrderStatus) string {
 	case constants.OrderCompleted:
 		return "success"
 	case constants.OrderCancelled:
-		return "danger"
+		return "success"
 	}
 	return "info"
 }
