@@ -55,7 +55,7 @@ func (r *pointsRuleRepository) List(page, pageSize int) ([]model.PointsRule, int
 	if err := q.Count(&total).Error; err != nil {
 		return nil, 0, fmt.Errorf("count points rules: %w", err)
 	}
-	if err := q.Offset(page * pageSize).Limit(pageSize).Order("id desc").Find(&rules).Error; err != nil {
+	if err := q.Offset((page - 1) * pageSize).Limit(pageSize).Order("id desc").Find(&rules).Error; err != nil {
 		return nil, 0, fmt.Errorf("list points rules: %w", err)
 	}
 	return rules, total, nil
