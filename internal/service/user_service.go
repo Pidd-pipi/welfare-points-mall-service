@@ -61,7 +61,7 @@ func (s *userService) Register(username, password, realName, email, phone, depar
 
 func (s *userService) Login(username, password string) (*model.User, string, error) {
 	user, err := s.userRepo.FindByUsername(username)
-	if err != nil {
+	if err != nil || user == nil {
 		s.logger.Warn(constants.LogUserLoginFailed, "username", username, "reason", "user not found")
 		return nil, "", fmt.Errorf("login: %w", util.ErrUnauthorized)
 	}
@@ -105,6 +105,9 @@ func (s *userService) GetByID(id uint) (*model.User, error) {
 	user, err := s.userRepo.FindByID(id)
 	if err != nil {
 		return nil, fmt.Errorf("get user[id=%d]: %w", id, err)
+	}
+	if user == nil {
+		return nil, fmt.Errorf("get user[id=%d]: %w", id, util.ErrNotFound)
 	}
 	return user, nil
 }

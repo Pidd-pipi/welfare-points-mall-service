@@ -64,12 +64,12 @@ func (h *UserHandler) Me(c *gin.Context) {
 		c.Error(util.Unauthorized(constants.MsgUnauthorized, err))
 		return
 	}
-	_, err = h.userSvc.GetByID(claims.UserID)
+	user, err := h.userSvc.GetByID(claims.UserID)
 	if err != nil {
 		c.Error(fmt.Errorf("handler me: %w", err))
 		return
 	}
-	util.OK(c, nil)
+	util.OK(c, user)
 }
 
 // UpdateProfile 修改资料。
