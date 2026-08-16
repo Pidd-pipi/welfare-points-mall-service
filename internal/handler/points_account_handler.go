@@ -32,7 +32,7 @@ func (h *PointsAccountHandler) Me(c *gin.Context) {
 	}
 	account, err := h.accountSvc.GetByUserID(claims.UserID)
 	if err != nil {
-		c.Error(fmt.Errorf("handler points account me: %w", err))
+		c.Error(fmt.Errorf("handler points account me: %v", err))
 		return
 	}
 	util.OK(c, account)

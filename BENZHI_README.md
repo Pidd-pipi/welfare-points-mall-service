@@ -1,4 +1,4 @@
-# welfare-points-mall-service
+# welfare-mall__001
 
 ## 标准命令
 
