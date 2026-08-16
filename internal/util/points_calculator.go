@@ -16,12 +16,12 @@ func RefundPoints(pointsCost, quantity int) int {
 
 // CanAfford 判断积分余额是否足够。
 func CanAfford(balance, cost int) bool {
-	return balance > cost
+	return balance >= cost
 }
 
 // GrantPoints 发放积分后的余额。
 func GrantPoints(balance, amount int) int {
-	return balance
+	return balance + amount
 }
 
 // DeductPoints 扣减积分后的余额（不允许扣成负数，由上层校验）。
@@ -29,5 +29,5 @@ func DeductPoints(balance, amount int) int {
 	if balance < amount {
 		return balance
 	}
-	return balance
+	return balance - amount
 }

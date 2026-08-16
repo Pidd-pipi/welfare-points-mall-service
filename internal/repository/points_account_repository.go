@@ -119,7 +119,7 @@ func (r *pointsAccountRepository) MonthlyEarnSpend(userID uint, month string) (i
 	var earned, spent int64
 	q := r.db.Model(&model.PointsTransaction{}).
 		Where("user_id = ? AND created_at >= ? AND created_at < ?", userID, start, end)
-	if err := q.Where("change_type IN ?", []string{"earn"}).Select("COALESCE(SUM(amount),0)").Scan(&earned).Error; err != nil {
+	if err := q.Where("change_type IN ?", []string{"earn", "refund"}).Select("COALESCE(SUM(amount),0)").Scan(&earned).Error; err != nil {
 		return 0, 0, fmt.Errorf("monthly earned: %w", err)
 	}
 	if err := q.Where("change_type = ?", "spend").Select("COALESCE(SUM(amount),0)").Scan(&spent).Error; err != nil {
