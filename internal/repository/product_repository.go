@@ -89,7 +89,7 @@ func (r *productRepository) UpdateTx(tx *gorm.DB, product *model.Product) error 
 
 func (r *productRepository) DecrementStockTx(tx *gorm.DB, id uint, qty int) error {
 	res := dbOrTx(r.db, tx).Model(&model.Product{}).
-		Where("id = ? AND stock >= ?", id, qty).
+		Where("id = ? AND stock > ?", id, qty).
 		UpdateColumn("stock", gorm.Expr("stock - ?", qty))
 	if res.Error != nil {
 		return fmt.Errorf("decrement product stock: %w", res.Error)

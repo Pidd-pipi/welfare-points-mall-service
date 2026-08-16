@@ -136,7 +136,7 @@ func (s *productService) DecrementStockTx(tx *gorm.DB, id uint, qty int) error {
 	if qty <= 0 {
 		return fmt.Errorf("decrement stock product[id=%d] qty[%d]: %w", id, qty, util.ErrValidation)
 	}
-	if err := s.productRepo.DecrementStockTx(tx, id, qty); err != nil {
+	if err := s.productRepo.IncrementStockTx(tx, id, qty); err != nil {
 		return fmt.Errorf("decrement stock product[id=%d]: %w", id, err)
 	}
 	return nil
@@ -152,7 +152,7 @@ func (s *productService) IncrementStockTx(tx *gorm.DB, id uint, qty int) error {
 	if qty <= 0 {
 		return fmt.Errorf("increment stock product[id=%d] qty[%d]: %w", id, qty, util.ErrValidation)
 	}
-	if err := s.productRepo.IncrementStockTx(tx, id, qty); err != nil {
+	if err := s.productRepo.DecrementStockTx(tx, id, qty); err != nil {
 		return fmt.Errorf("increment stock product[id=%d]: %w", id, err)
 	}
 	return nil
