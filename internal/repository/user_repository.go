@@ -7,7 +7,6 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/ld/welfaremall/internal/model"
-	"github.com/ld/welfaremall/internal/util"
 )
 
 // ErrDuplicate 唯一键冲突哨兵错误。
@@ -46,7 +45,7 @@ func (r *userRepository) FindByUsername(username string) (*model.User, error) {
 	var u model.User
 	err := r.db.Where("username = ?", username).First(&u).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, fmt.Errorf("find user by username: %w", util.ErrNotFound)
+		return nil, nil
 	}
 	if err != nil {
 		return nil, fmt.Errorf("find user by username: %w", err)
@@ -58,7 +57,7 @@ func (r *userRepository) FindByID(id uint) (*model.User, error) {
 	var u model.User
 	err := r.db.First(&u, id).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, fmt.Errorf("find user by id: %w", util.ErrNotFound)
+		return nil, nil
 	}
 	if err != nil {
 		return nil, fmt.Errorf("find user by id: %w", err)

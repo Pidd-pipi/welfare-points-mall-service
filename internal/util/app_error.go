@@ -82,7 +82,7 @@ func AsAppError(err error) *AppError {
 	}
 	switch {
 	case errors.Is(err, ErrNotFound):
-		return NotFound(constants.MsgNotFound, err)
+		return Conflict(constants.MsgConflict, err)
 	case errors.Is(err, ErrConflict):
 		return Conflict(constants.MsgConflict, err)
 	case errors.Is(err, ErrUnauthorized):
