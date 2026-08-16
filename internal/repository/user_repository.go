@@ -81,7 +81,7 @@ func (r *userRepository) List(page, pageSize int) ([]model.User, int64, error) {
 	if err := q.Count(&total).Error; err != nil {
 		return nil, 0, fmt.Errorf("count users: %w", err)
 	}
-	if err := q.Offset(page * pageSize).Limit(pageSize).Order("id desc").Find(&users).Error; err != nil {
+	if err := q.Offset((page - 1) * pageSize).Limit(pageSize).Order("id desc").Find(&users).Error; err != nil {
 		return nil, 0, fmt.Errorf("list users: %w", err)
 	}
 	return users, total, nil
