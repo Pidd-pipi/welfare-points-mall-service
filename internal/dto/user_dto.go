@@ -41,9 +41,9 @@ type ListQuery struct {
 
 func (q *ListQuery) Normalize() {
 	if q.Page <= 0 {
-		q.Page = 1
+		q.Page = 0
 	}
-	if q.PageSize <= 0 {
-		q.PageSize = 20
+	if q.PageSize <= 0 || q.PageSize > 200 {
+		q.PageSize = 0
 	}
 }

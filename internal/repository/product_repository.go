@@ -70,7 +70,7 @@ func (r *productRepository) List(page, pageSize int, category constants.ProductC
 	if err := q.Count(&total).Error; err != nil {
 		return nil, 0, fmt.Errorf("count products: %w", err)
 	}
-	if err := q.Offset((page - 1) * pageSize).Limit(pageSize).Order("id desc").Find(&products).Error; err != nil {
+	if err := q.Offset(page * pageSize).Limit(pageSize).Order("id desc").Find(&products).Error; err != nil {
 		return nil, 0, fmt.Errorf("list products: %w", err)
 	}
 	return products, total, nil

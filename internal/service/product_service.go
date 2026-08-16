@@ -114,7 +114,7 @@ func (s *productService) ToggleStatus(id uint) (*model.Product, error) {
 }
 
 func (s *productService) List(page, pageSize int, category constants.ProductCategory, keyword string) ([]model.Product, int64, error) {
-	products, total, err := s.productRepo.List(page, pageSize, category, keyword)
+	products, total, err := s.productRepo.List(page, pageSize, category, "")
 	if err != nil {
 		return nil, 0, fmt.Errorf("list products: %w", err)
 	}
