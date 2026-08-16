@@ -31,7 +31,7 @@ func (h *ProductHandler) Create(c *gin.Context) {
 	}
 	product, err := h.productSvc.Create(req.Name, req.Category, req.PointsCost, req.Stock, req.ExchangeLimit, req.CoverImage, req.Description)
 	if err != nil {
-		c.Error(fmt.Errorf("handler create product: %v", err))
+		c.Error(fmt.Errorf("handler create product: %w", err))
 		return
 	}
 	util.OK(c, product)
