@@ -1,0 +1,30 @@
+package constants
+
+// messages.go 同时承载前端提示文案、后端返回文案与日志文案。
+const (
+	MsgOK                   = "ok"
+	MsgInvalidRequest       = "请求参数不合法"
+	MsgUnauthorized         = "未登录或登录已过期"
+	MsgForbidden            = "无权限执行该操作"
+	MsgNotFound             = "资源不存在"
+	MsgConflict             = "资源状态冲突"
+	MsgRateLimited          = "请求过于频繁，请稍后再试"
+	MsgInternalError        = "服务器内部错误"
+	MsgLoginSuccess         = "登录成功"
+	MsgRegisterSuccess      = "注册成功"
+	MsgPasswordIncorrect    = "用户名或密码错误"
+	MsgPointsNotEnough      = "积分余额不足"
+	MsgProductOutOfStock    = "商品库存不足"
+	MsgOrderCancelSuccess   = "订单已取消，积分已返还"
+	MsgOrderShipSuccess     = "订单已发货"
+	MsgOrderCompleteSuccess = "订单已完成"
+	MsgExchangeLimitReached = "超出兑换限制"
+	MsgSeckillNotActive     = "秒杀活动未开始或已结束"
+	MsgSeckillSoldOut       = "秒杀库存已售罄"
+	MsgLotteryNotActive     = "抽奖活动未开始或已结束"
+	MsgRuleExecuteSuccess   = "积分发放任务执行成功"
+	MsgPointsGranted        = "积分已发放"
+	MsgExchangeSuccess      = "兑换成功"
+	MsgSeckillSuccess       = "秒杀抢购成功"
+	MsgLotterySuccess       = "抽奖成功"
+)
