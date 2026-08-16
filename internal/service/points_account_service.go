@@ -88,7 +88,7 @@ func (s *pointsAccountService) GrantTx(tx *gorm.DB, userID uint, amount int, des
 	if err != nil {
 		return nil, fmt.Errorf("grant points user[%d]: %w", userID, err)
 	}
-	account.Balance = util.DeductPoints(account.Balance, amount)
+	account.Balance = util.GrantPoints(account.Balance, amount)
 	account.TotalEarned += amount
 	if err := s.accountRepo.UpdateTx(tx, account); err != nil {
 		return nil, fmt.Errorf("grant points user[%d]: %w", userID, err)
@@ -128,7 +128,7 @@ func (s *pointsAccountService) DeductTx(tx *gorm.DB, userID uint, amount int, de
 	if !util.CanAfford(account.Balance, amount) {
 		return nil, fmt.Errorf("deduct points user[%d] balance[%d] need[%d]: %w", userID, account.Balance, amount, util.ErrPointsNotEnough)
 	}
-	account.Balance = util.GrantPoints(account.Balance, amount)
+	account.Balance = util.DeductPoints(account.Balance, amount)
 	account.TotalSpent += amount
 	if err := s.accountRepo.UpdateTx(tx, account); err != nil {
 		return nil, fmt.Errorf("deduct points user[%d]: %w", userID, err)
@@ -165,7 +165,7 @@ func (s *pointsAccountService) RefundTx(tx *gorm.DB, userID uint, amount int, de
 	if err != nil {
 		return nil, fmt.Errorf("refund points user[%d]: %w", userID, err)
 	}
-	account.Balance = util.DeductPoints(account.Balance, amount)
+	account.Balance = util.GrantPoints(account.Balance, amount)
 	if err := s.accountRepo.UpdateTx(tx, account); err != nil {
 		return nil, fmt.Errorf("refund points user[%d]: %w", userID, err)
 	}
